@@ -1,0 +1,19 @@
+PayrollManagement.API/Docs/
+
+# .NET build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+
+# Node / Vite
+node_modules/
+dist/
+
+# Environment files (machine-specific - share .env.example instead)
+.env
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat

@@ -1,0 +1,40 @@
+body {
+  background-color: #f5f6f8;
+}
+
+/* Printable payslip: hide everything in the app except the payslip card
+   itself, so printing produces a clean single-page slip rather than the
+   whole page (header, forms, tables, modal overlay chrome).
+   `.no-print` is applied to: the page header + main content block in
+   App.jsx (so they're removed from layout - `display: none` collapses
+   their height, unlike `visibility: hidden`, which would leave the page
+   viewport-tall and push the card onto a second/third page), and to the
+   modal's own header buttons. `!important` is required because Bootstrap's
+   utility classes (`.position-fixed`, `.h-100`, `.d-flex`, etc.) are
+   themselves declared with `!important`. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  /* The overlay is `position: fixed`, full-viewport, and flex-centered so it
+     can sit on top of the app on screen. Left as-is for print, the centered
+     card plus the surrounding empty space would be taller than one page -
+     and browsers repeat `position: fixed` elements on every printed page,
+     which is what produced a duplicate. Forcing it to a normal, auto-height
+     block lets the card flow naturally and collapses the page to its size. */
+  .payslip-overlay {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    background: none !important;
+  }
+
+  #payslip-printable {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+}
